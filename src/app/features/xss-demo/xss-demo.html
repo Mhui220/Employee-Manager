@@ -1,0 +1,24 @@
+<div class="xss-demo-container">
+    <h2>XSS Demo</h2>
+
+    <p>Try entering HTML or XSS payload below:</p>>
+    <pre>&lt;img scr="x" onerror="alert('Xss excecuted')"&gt;</pre>
+
+    <textarea 
+    [(ngModel)]="userInput"
+    rows="5"
+    placeholder="Type HTML or an XSS attack here...">
+    </textarea>
+
+    <div class="button-panel">
+        <button (click)="renderUnsafe()">Render UNSAFE (innerHTML)</button>
+        <button (click)="renderSanitized()">Render with DomSanitizer</button>
+    </div>
+    
+    <hr>
+
+    <h3>UNSAFE Output(innerHTML -> XSS)</h3>
+    <div id="unsafeBox" class="box unsafeBox"></div>
+
+    <div class="box sanitized-box" [innerHTML]="sanitizedOutput"></div>
+</div>

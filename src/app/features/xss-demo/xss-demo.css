@@ -1,0 +1,35 @@
+.xss-demo-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+textarea {
+    width: 100%;
+    font-family: monospace;
+    margin-bottom: 12px;
+}
+
+.button-panel button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding: 6px 16px;
+}
+
+.box {
+    border: 1px solid #ccc;
+    background: #fafafa;
+    min-height: 40px;
+    padding: 10px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+}
+
+.safe-box {
+    border-color: #4caf50;
+}
+.unsafe-box {
+    border-color: #f44336;
+}
+.sanitized-box {
+    border-color: #2196f3;
+}

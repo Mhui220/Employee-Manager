@@ -1,0 +1,47 @@
+<div class="login-container">
+    <h2>Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" type="email" formControlName="email" placeholder="you@example.com" />
+
+            @if(submitted && f['email'].errors) {
+                @let emailErrors = f['email'].errors;
+
+                <div class="error">
+                    @if(emailErrors['required']) {
+                        <span>Email is required.</span>
+                    }
+                    @if(emailErrors['email']) {
+                        <span>Invalid Email format.</span>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="form-field">
+            <label for="password">Password</label>
+            <input id="password" type="password" formControlName="password" placeholder="Password" />
+
+            @if(submitted && f['password'].errors) {
+                @let passwordErrors = f['password'].errors;
+
+                <div class="error">
+                    @if(passwordErrors['required']) {
+                        <span>Password is required.</span>
+                    }
+                    @if(passwordErrors['minLength']) {
+                        <span>Minumum {{passwordErrors['minLength'].requiredLength}} characters.</span>
+                    }
+                </div>
+            }
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    @if(loginMessage) {
+        <p class="message">{{loginMessage}}</p>
+    }
+</div>

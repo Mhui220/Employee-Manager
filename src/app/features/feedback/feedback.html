@@ -1,0 +1,47 @@
+<div class="feedback-container">
+    <h2>Feedback Form</h2>
+
+    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <label for="name">Name</label>
+            <input id="name" type="name" formControlName="name" placeholder="Name" />
+
+            @if(submitted && f['name'].errors) {
+                @let nameErrors = f['name'].errors;
+
+                <div class="error">
+                    @if(nameErrors['required']) {
+                        <span>Name is required.</span>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" type="message" formControlName="message" placeholder="Message"></textarea>
+
+            @if(submitted && f['message'].errors) {
+                @let messageErrors = f['message'].errors;
+
+                <div class="error">
+                    @if(messageErrors['required']) {
+                        <span>Password is required.</span>
+                    }
+                    @if(messageErrors['maxLength']) {
+                        <span>Minumum {{messageErrors['maxLength'].requiredLength}} characters.</span>
+                    }
+                </div>
+            }
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    @if(name) {
+        <p class="message">{{name}}</p>
+    }
+    @if(message) {
+        <p class="message">{{message}}</p>
+    }
+</div>

@@ -1,0 +1,21 @@
+.top-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10x 16px;
+    background: #222;
+    color: #fff;
+}
+
+.top-nav .brand {
+    font-weight: 600;
+}
+
+.top-nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.page-content {
+    padding: 24px;
+}
