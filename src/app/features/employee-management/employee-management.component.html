@@ -1,0 +1,54 @@
+@if(isloading()) {
+    <div>loading....</div>
+} @else {
+    <div class="card">
+        <div class="card-body m-auto">
+            <div class="d-flex flex-column">
+                <div>
+                    <button class="btn btn-md btn-primary" (click)="addRecord()">Add</button>
+                </div>
+                <hr />
+
+                <div class="table table-bordered">
+                    <table>
+                        <!-- Table Header Section -->
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone No.</th>
+                                <th>Salary</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                
+                        <!-- Table Body Section (main data) -->
+                        <tbody>
+                            @for(item of recordList; track item) {
+                            <tr>
+                                <td>{{item.name}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.phone}}</td>
+                                <td>RM {{item.salary}}</td>
+                                <td>
+                                    <div ngbDropdown class="d-inline-block">
+                                        <button type="button" class="btn btn-icon" id="dropdown" ngbDropdownToggle>
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <button ngbDropdownItem (click)="editRecord(item.id)">Edit</button>
+                                            <button ngbDropdownItem (click)="removeRecord(item)">Remove</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            }@empty {
+                            No Data.
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

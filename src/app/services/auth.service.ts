@@ -1,30 +1,42 @@
 import { Router } from "@angular/router";
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "../../environment";
+
+interface LoginResponse {
+  token: string;
+  // other fields if your API returns user info
+}
 
 @Injectable({
     providedIn: "root"
 })
 
 export class AuthService {
+    private apiUrl = `${environment.apiUrl}/auth/login`;
     private fakeToken : string | null = null;
 
-    constructor(private readonly router : Router) {}
+    constructor(private readonly router : Router, private readonly http: HttpClient) {}
 
-    login(email: string, password: string): boolean {
-        if(email === 'admin@example.com' && password === 'admin') {
-            this.fakeToken = 'FAKE_JWT_TOKEN';
-            return true;
-        }
+    login(username: string, password: string): Observable<LoginResponse> {
+        return this.http.post<LoginResponse>(this.apiUrl, { username, password });
+    }
 
-        return false;
+    setToken(token: string) {
+        localStorage.setItem('token', token);
+    }
+
+    getToken(): string | null {
+        return localStorage.getItem('token');
     }
 
     logout(): void {
-        this.fakeToken = null;
+        localStorage.clear();
         this.router.navigate(['/login']);
     }
 
     isLoggedIn(): boolean {
-        return this.fakeToken !== null;
+        return localStorage.getItem('token') !== null;
     }
 }

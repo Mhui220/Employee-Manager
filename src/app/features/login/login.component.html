@@ -2,7 +2,7 @@
     <h2>Login</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-field">
+        <!-- <div class="form-field">
             <label for="email">Email</label>
             <input id="email" type="email" formControlName="email" placeholder="you@example.com" />
 
@@ -18,6 +18,21 @@
                     }
                 </div>
             }
+        </div> -->
+
+        <div class="form-field">
+            <label for="username">UserName</label>
+                <input id="username" type="username" formControlName="username" placeholder="Enter your username" />
+
+                @if(submitted && f['username'].errors) {
+                    @let usernameErrors = f['username'].errors;
+
+                    <div class="error">
+                        @if(usernameErrors['required']) {
+                            <span>UserName is required.</span>
+                        }
+                    </div>
+                }
         </div>
 
         <div class="form-field">

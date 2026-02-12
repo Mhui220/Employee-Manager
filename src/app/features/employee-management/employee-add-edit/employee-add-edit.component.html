@@ -1,0 +1,86 @@
+<div class="card">
+    <div class="card-body">
+        <div>{{isEditAction === true ? 'Edit': 'Add'}} Employee</div>
+        <hr />
+        <form [formGroup]="employeeAddForm">
+            <div class="form-field row my-2">
+                <div class="col-3"><label for="name">Name</label></div>
+                <div class="col-9">
+                    <input id="name" type="text" class="form-control" formControlName="name" placeholder="Enter your name" />
+                
+                    @if(employeeAddForm.controls.name.errors && employeeAddForm.controls.name.touched) {
+                    @let nameErrors = employeeAddForm.controls.name.errors;
+                
+                    <div class="error text-danger">
+                        @if(nameErrors['required']) {
+                        <span>Name is required.</span>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field row my-2">
+                <div class="col-3"><label for="email">Email</label></div>
+                <div class="col-9">
+                    <input id="email" type="text" class="form-control" formControlName="email" placeholder="Enter your email" />
+                
+                    @if(employeeAddForm.controls.email.errors && employeeAddForm.controls.email.touched) {
+                    @let emailErrors = employeeAddForm.controls.email.errors;
+                
+                    <div class="error text-danger">
+                        @if(emailErrors['required']) {
+                        <span>Email is required.</span>
+                        }
+                        @if(emailErrors['pattern']) {
+                        <span>Email is invalid.</span>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field row my-2">
+                <div class="col-3">
+                    <label for="phoneNumber">Phone No.</label>
+                </div>
+                <div class="col-9">
+                    <input id="phoneNumber" type="text" class="form-control" formControlName="phoneNumber" placeholder="Enter your Phone Number" />
+                
+                    @if(employeeAddForm.controls.phoneNumber.errors && employeeAddForm.controls.phoneNumber.touched) {
+                    @let phoneNumberErrors = employeeAddForm.controls.phoneNumber.errors;
+                
+                    <div class="error text-danger">
+                        @if(phoneNumberErrors['required']) {
+                        <span>Phone No. is required.</span>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-field row my-2">
+                <div class="col-3"><label for="salary">Salary</label></div>
+                <div class="col-9">
+                    <input id="salary" type="text" class="form-control" formControlName="salary" placeholder="Enter your Salary" />
+                
+                    @if(employeeAddForm.controls.salary.errors && employeeAddForm.controls.salary.touched) {
+                    @let salaryErrors = employeeAddForm.controls.salary.errors;
+                
+                    <div class="error text-danger">
+                        @if(salaryErrors['required']) {
+                        <span>Salary is required.</span>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+        </form>
+        <hr />
+        <div class="text-end">
+            <button class="btn btn-light me-2" (click)="cancel()">Cancel</button>
+            <button class="btn btn-primary" [disabled]="employeeAddForm.invalid || !employeeAddForm.dirty || addLoading()" 
+                (click)="onSubmit()">Submit</button>
+        </div>
+    </div>
+</div>
